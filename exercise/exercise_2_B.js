@@ -9,26 +9,10 @@ const createProduct = async (nome, valor) => {
 			`INSERT INTO Produto (nome, valor) VALUES (?,?)`,
 			[nome, valor]
 		);
+
 		return produto.insertId;
-	} catch (err) {
-		console.error(`messageError: ${err}`);
-		throw err;
-	}
-};
-
-// Função para consultar produtos pelo codigo
-
-const getProductByCod = async (codigo) => {
-	try {
-		const [produto] = await connection.query(
-			`SELECT * FROM Produto WHERE codigo = ?`,
-			[codigo]
-		);
-
-		return produto.length !== 0 ? produto : null;
 	} catch (error) {
-		console.error(`messageError: ${err}`);
-		throw err;
+		console.error(`${error}`);
 	}
 };
 
@@ -40,7 +24,3 @@ const start = async () => {
 };
 
 start();
-
-module.exports = {
-	getProductByCod,
-};
