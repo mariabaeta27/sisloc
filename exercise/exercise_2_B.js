@@ -5,12 +5,12 @@ const connection = require("../connection");
 
 const createProduct = async (nome, valor) => {
 	try {
-		const [produto] = await connection.query(
+		const [product] = await connection.query(
 			`INSERT INTO Produto (nome, valor) VALUES (?,?)`,
 			[nome, valor]
 		);
 
-		return produto.insertId;
+		return product.insertId;
 	} catch (error) {
 		console.error(`${error}`);
 	}
@@ -23,4 +23,6 @@ const start = async () => {
 	console.log("codigo: ", result);
 };
 
-start();
+// start();
+
+module.exports = createProduct;

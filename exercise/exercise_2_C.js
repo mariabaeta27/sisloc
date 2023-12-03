@@ -5,12 +5,11 @@ const connection = require("../connection");
 
 const createProductWhitDiscount = async (codigo, quantidade, valor) => {
 	try {
-		const [produto] = await connection.query(
+		const [discountProduct] = await connection.query(
 			`INSERT INTO ProdutoDesconto (codigo, quantidade, valor) VALUES (?, ?, ?)`,
 			[codigo, quantidade, valor]
 		);
-		console.log(produto);
-		return produto;
+		return discountProduct;
 	} catch (error) {
 		console.error(`${error}`);
 	}
@@ -20,14 +19,14 @@ const createProductWhitDiscount = async (codigo, quantidade, valor) => {
 
 const getProductByCod = async (codigo) => {
 	try {
-		const [produto] = await connection.query(
+		const [product] = await connection.query(
 			`SELECT * FROM Produto WHERE codigo = ?`,
 			[codigo]
 		);
 
-		return produto.length !== 0 ? produto : null;
+		return product.length !== 0 ? product : null;
 	} catch (error) {
-		console.error(`messageError: ${err}`);
+		console.error(`${error}`);
 	}
 };
 
@@ -36,9 +35,9 @@ const start = async () => {
 		let codigo = readline.question("Qual o código do produto? ");
 		let quantidade = readline.question("Qual a quantidade? ");
 		let valor = readline.question("Qual o valor já com desconto? ");
-		const produto = await getProductByCod(codigo);
+		const codProduct = await getProductByCod(codigo);
 
-		if (produto) {
+		if (codProduct) {
 			await createProductWhitDiscount(codigo, quantidade, valor);
 		} else {
 			throw new Error("Produto não cadastrado");
@@ -48,4 +47,6 @@ const start = async () => {
 	}
 };
 
-start();
+// start();
+
+module.exports = createProductWhitDiscount;
