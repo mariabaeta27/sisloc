@@ -26,35 +26,61 @@ implementação das soluções, isto é, no código-fonte em si!!!
 às regras. Quanto mais próximo da nossa realidade (Outsystems, Javascript, Delphi),
 melhor!
 
-## Exercícios
-
-[x] 1. Lógica básico (2 pontos):
-
-- Escreva uma função (reutilizável) que receba a quantidade de DVDs a ser vendida e retorne o
-valor desta venda como parâmetro.
-
-[x] 2. Acrescentando banco de dados
-
-- [x] Questão A (1 ponto): Escreva comandos SQL para criar as tabelas acima com as respectivas chaves
-primárias, estrangeiras e índice único (Atenção: Somente os comandos em SQL nesta questão
-A, não precisa de códigos de funções, nem imagens de entidades).
-- [x] Questão B (1 ponto): Escreva uma função para inserir um registro na tabela produto, que recebe como
-parâmetro o nome do produto e o valor e retorna o código que deve ser gerado por esta função
-(Atenção: Agora sim é código fonte, não função de banco de dados. A partir desta questão, se
-atentar a código fonte de programação. Programação somente em banco de dados não serão
-considerados.).
-- [x] Questão C (1 ponto): Escreva uma função para inserir um registro na tabela ProdutoDesconto, que
-recebe como parâmetro o código do produto, a quantidade inicial da faixa e o valor já com
-desconto.
-- [x] Questão D (1 ponto): Escreva uma função que utilize as funções criadas acima, para inserir os registros
-no banco de dados do problema do EXERCÍCIO 1.
-- [x] Questão E (4 ponto): Escreva uma função que receba como parâmetro o código do produto e a
-quantidade a ser vendida, e retorne o valor total da venda. Nesta questão deverá ser feito
-consultas às tabelas criadas no exercício anterior, de forma que implemente um algoritmo
-baseado na questão (A) porém com valores armazenados e não fixos. Atenção para o fato de
-que no exercício (A) só temos duas faixas de desconto e, neste exercício, as faixas de desconto
-estão armazenadas na tabela.
-
 ## Setup do projeto
 
 - Baixe o repositório no [Github](https://github.com/mariabaeta27/sisloc)
+- Acesse a pasta do projeto
+- Instale as dependências
+
+```bash
+yarn install
+```
+
+- Crie um arquivo .env como as propriedades:
+
+```bash
+PORT
+MYSQL_USER
+MYSQL_PASSWORD
+HOST
+```
+
+ou utilize os valores default definido no arquivo [connection.js](./connection.js)
+
+## Exercícios
+
+Para executar os exercícios acesse pasta [exercises](./exercises/)
+
+```bash
+cd exercisess
+```
+
+### 1. Lógica básico
+
+- [x] Escreva uma função (reutilizável) que receba a quantidade de DVDs a ser vendida e retorne o valor desta venda como parâmetro (2 pontos).
+
+  - Para executar: No terminal rode o comando: **node exercise_1.js**
+
+### 2. Acrescentando banco de dados
+
+- [x] [Questão A](./exercises/exercise_2_A.sql): Escreva comandos SQL para criar as tabelas acima com as respectivas chaves primárias, estrangeiras e índice único (1 ponto).
+
+  - Para executar: No banco execute o [script SQL](./exercises/exercise_2_A.sql).
+
+- [x] Questão B: Escreva uma função para inserir um registro na tabela produto, que recebe como parâmetro o nome do produto e o valor e retorna o código que deve ser gerado por esta função (1 ponto).
+
+  - **Atenção!** Para testar a função separadamente descomente a linha 31 [aqui](./exercises/exercise_2_B.js).
+  - Para executar: No terminal rode o comando: **node exercise_2_B.js**
+
+- [x] Questão C: Escreva uma função para inserir um registro na tabela ProdutoDesconto, que recebe como parâmetro o código do produto, a quantidade inicial da faixa e o valor já com desconto (1 ponto).
+
+  - **Atenção!** Para testar a função separadamente descomente a linha 56 [aqui](./exercises/exercise_2_C.js).
+  - Para executar: No terminal rode o comando: **node exercise_2_C.js**
+
+- [x] [Questão D](./exercises//exercise_2_D.js): Escreva uma função que utilize as funções criadas acima, para inserir os registros no banco de dados do problema do EXERCÍCIO 1 (1 ponto).
+
+  - Para executar: No terminal rode o comando: **node exercise_2_D.js**
+
+- [x] [Questão E](./exercises/exercise_2_E.js): Escreva uma função que receba como parâmetro o código do produto e a quantidade a ser vendida, e retorne o valor total da venda. Nesta questão deverá ser feito consultas às tabelas criadas no exercício anterior, de forma que implemente um algoritmo baseado na questão (A) porém com valores armazenados e não fixos. Atenção para o fato de que no exercício (A) só temos duas faixas de desconto e, neste exercício, as faixas de desconto estão armazenadas na tabela (4 pontos).
+
+  - Para executar: No terminal rode o comando: **node exercise_2_E.js**

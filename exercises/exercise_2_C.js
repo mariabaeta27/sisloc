@@ -51,7 +51,7 @@ const start = async () => {
 	process.exit();
 };
 
-// Para testar a função basta remover o // da linha a baixo e rodar o comando node
+// Para testar a função  separada basta remover o // da linha a baixo e rodar o comando node
 
 // start();
 

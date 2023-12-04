@@ -6,8 +6,8 @@ const createProductWhitDiscount = require("./exercise_2_C");
 const registreData = async () => {
 	try {
 		const codProduto = await createProduct("Dvd", 1.1);
+		await createProductWhitDiscount(codProduto, 10, 1);
 		await createProductWhitDiscount(codProduto, 20, 0.9);
-		// await createProductWhitDiscount(codProduto, 10, 1);
 	} catch (error) {
 		console.error(`${error}`);
 	}
