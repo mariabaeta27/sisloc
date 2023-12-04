@@ -10,7 +10,8 @@ valor FLOAT(10) NOT NULL
 
 CREATE TABLE IF NOT EXISTS sisloc.ProdutoDesconto(
 codigo INT(10) NOT NULL,
-quantidade INT(10) NOT NULL PRIMARY KEY,
+quantidade INT(10) NOT NULL,
 valor FLOAT(10) NOT NULL,
+PRIMARY KEY (codigo, quantidade),
 FOREIGN KEY (codigo) REFERENCES Produto(codigo)
 )

@@ -16,13 +16,18 @@ const createProduct = async (nome, valor) => {
 	}
 };
 
+// Função para testar a execução da createProduct
+
 const start = async () => {
 	let nome = readline.question("Qual o nome do produto? ");
 	let valor = readline.question("Qual o valor do produto? ");
 	const result = await createProduct(nome, valor);
 	console.log("codigo: ", result);
+	// O método process.exit() é usado para finalizar o processo que está sendo executado ao mesmo tempo com um código de saída no NodeJS
+	process.exit();
 };
 
+// Para testar a função basta remover o // da linha a baixo e rodar o comando node
 // start();
 
 module.exports = createProduct;

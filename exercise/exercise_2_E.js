@@ -6,24 +6,48 @@ const readline = require("readline-sync");
 
 const calculatePrice = async (codigo, quantidade) => {
 	try {
-		const [produtos] = await connection.query(
-			`SELECT * FROM Produto WHERE codigo = ?	`,
-			[codigo]
-		);
-		const [produtosDesconto] = await connection.query(
-			`SELECT * FROM ProdutoDesconto WHERE codigo = ?`,
+		const [[product]] = await connection.query(
+			`SELECT * FROM Produto WHERE codigo = ?`,
 			[codigo]
 		);
 
-		let value = 0;
-		let amount = 0;
-		if (produtos.length !== 0 && produtosDesconto.length !== 0) {
-			console.log("Produtos", produtos, "produtosDesconto", produtosDesconto);
+		if (product) {
+			const [discountProducts] = await connection.query(
+				`SELECT * FROM ProdutoDesconto WHERE codigo = ? ORDER BY quantidade`,
+				[product.codigo]
+			);
 
-			produtosDesconto.forEach((discount) => {
-				if (quantidade <= discount.quantidade) {
+			let price = 0;
+
+			const firstIndex = 0;
+			const lastIndex = discountProducts.length - 1;
+
+			discountProducts.forEach((discount, index) => {
+				if (quantidade > discount.quantidade || index === firstIndex) {
+					if (index === firstIndex) {
+						price =
+							quantidade < discount.quantidade
+								? product.valor * quantidade
+								: product.valor * discount.quantidade;
+					}
+
+					if (index !== lastIndex && quantidade > discount.quantidade) {
+						if (quantidade > discountProducts[index + 1].quantidade) {
+							price +=
+								discount.valor *
+								(discountProducts[index + 1].quantidade - discount.quantidade);
+						} else {
+							price += discount.valor * (quantidade - discount.quantidade);
+						}
+					}
+
+					if (index === lastIndex && quantidade > discount.quantidade) {
+						price += discount.valor * (quantidade - discount.quantidade);
+					}
 				}
 			});
+
+			console.log(`O valor da venda será: R$ ${price.toFixed(2)}`);
 		} else {
 			throw new Error("Produto não encontrado");
 		}
