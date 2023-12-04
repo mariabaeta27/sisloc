@@ -33,7 +33,9 @@ melhor!
 - Instale as dependências
 
 ```bash
-yarn install
+yarn install 
+ou 
+npm install
 ```
 
 - Crie um arquivo .env como as propriedades:
