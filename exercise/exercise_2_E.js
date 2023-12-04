@@ -26,19 +26,20 @@ const calculatePrice = async (codigo, quantidade) => {
 				if (quantidade > discount.quantidade || index === firstIndex) {
 					if (index === firstIndex) {
 						price =
-							quantidade < discount.quantidade
-								? product.valor * quantidade
-								: product.valor * discount.quantidade;
+							product.valor *
+							(quantidade < discount.quantidade
+								? quantidade
+								: discount.quantidade);
 					}
 
 					if (index !== lastIndex && quantidade > discount.quantidade) {
-						if (quantidade > discountProducts[index + 1].quantidade) {
-							price +=
-								discount.valor *
-								(discountProducts[index + 1].quantidade - discount.quantidade);
-						} else {
-							price += discount.valor * (quantidade - discount.quantidade);
-						}
+						const nextDiscount = discountProducts[index + 1];
+
+						price +=
+							discount.valor *
+							(quantidade > nextDiscount.quantidade
+								? nextDiscount.quantidade - discount.quantidade
+								: quantidade - discount.quantidade);
 					}
 
 					if (index === lastIndex && quantidade > discount.quantidade) {
