@@ -22,32 +22,35 @@ const calculatePrice = async (codigo, quantidade) => {
 			const firstIndex = 0;
 			const lastIndex = discountProducts.length - 1;
 
-			discountProducts.forEach((discount, index) => {
-				if (quantidade > discount.quantidade || index === firstIndex) {
-					if (index === firstIndex) {
-						price =
-							product.valor *
-							(quantidade < discount.quantidade
-								? quantidade
-								: discount.quantidade);
+			if (discountProducts.length !== 0) {
+				discountProducts.forEach((discount, index) => {
+					if (quantidade > discount.quantidade || index === firstIndex) {
+						if (index === firstIndex) {
+							price =
+								product.valor *
+								(quantidade < discount.quantidade
+									? quantidade
+									: discount.quantidade);
+						}
+
+						if (index !== lastIndex && quantidade > discount.quantidade) {
+							const nextDiscount = discountProducts[index + 1];
+
+							price +=
+								discount.valor *
+								(quantidade > nextDiscount.quantidade
+									? nextDiscount.quantidade - discount.quantidade
+									: quantidade - discount.quantidade);
+						}
+
+						if (index === lastIndex && quantidade > discount.quantidade) {
+							price += discount.valor * (quantidade - discount.quantidade);
+						}
 					}
-
-					if (index !== lastIndex && quantidade > discount.quantidade) {
-						const nextDiscount = discountProducts[index + 1];
-
-						price +=
-							discount.valor *
-							(quantidade > nextDiscount.quantidade
-								? nextDiscount.quantidade - discount.quantidade
-								: quantidade - discount.quantidade);
-					}
-
-					if (index === lastIndex && quantidade > discount.quantidade) {
-						price += discount.valor * (quantidade - discount.quantidade);
-					}
-				}
-			});
-
+				});
+			} else {
+				price = product.valor * quantidade;
+			}
 			console.log(`O valor da venda será: R$ ${price.toFixed(2)}`);
 		} else {
 			throw new Error("Produto não encontrado");
