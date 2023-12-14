@@ -38,18 +38,18 @@ const createProductWhitDiscount = async (codigo, quantidade, valor) => {
 
 // Função para testar a execução de createProductWhitDiscount
 
-const start = async () => {
-	try {
-		let codigo = readline.question("Qual o código do produto? ");
-		let quantidade = readline.question("Qual a quantidade? ");
-		let valor = readline.question("Qual o valor já com desconto? ");
+// const start = async () => {
+// 	try {
+// 		let codigo = readline.question("Qual o código do produto? ");
+// 		let quantidade = readline.question("Qual a quantidade? ");
+// 		let valor = readline.question("Qual o valor já com desconto? ");
 
-		await createProductWhitDiscount(codigo, quantidade, valor);
-	} catch (error) {
-		console.error(`${error}`);
-	}
-	process.exit();
-};
+// 		await createProductWhitDiscount(codigo, quantidade, valor);
+// 	} catch (error) {
+// 		console.error(`${error}`);
+// 	}
+// 	process.exit();
+// };
 
 // Para testar a função  separada basta remover o // da linha a baixo e rodar o comando node
 
